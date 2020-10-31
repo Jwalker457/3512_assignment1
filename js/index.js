@@ -69,23 +69,11 @@ document.addEventListener("DOMContentLoaded", function () {
     );
   }
 
-  /* TODOs (maybe not accurate) 
-  - large painting view (done)
-  - popup modal / light box effect (click on large painting)
-  - toggle gallery list
-  - sort paintings
-  - code/comments clean up 
-  - site UI (done ish)
-  - upload to github (done)
-*/
-
   document.querySelector("#galleryList").addEventListener("click", (e) => {
-    //document.querySelector("#paintingsList").innerHTML = "";
     if (e.target.nodeName == "LI") {
       paintings = [];
       changeMap(e);
       let galleryID = e.target.getAttribute("data-key");
-      //get gallery ID use data-key attribute = galleryListItem.GalleryID
 
       fetch(paintingsEndpoint + galleryID)
         .then((response) => {
@@ -120,12 +108,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
           paintings.forEach((painting) => {
             let paintingsListItem = document.createElement("tr");
-            //paintingsListItem.setAttribute("data-key", painting.PaintingID);
-
-            //   h### w###
-            //paintingImages = `https://res.cloudinary.com/funwebdev/image/upload/${SIZE}/art/paintings/${FILENAME}`
-            //  https://res.cloudinary.com/funwebdev/image/upload/h_050/art/paintings/018040.jpg
-            // store this into a array?
 
             paintingsListItem.innerHTML = `<td><img data-key=${
               painting.ImageFileName

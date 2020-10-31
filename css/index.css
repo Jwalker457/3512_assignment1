@@ -1,5 +1,4 @@
 body {
-  /* margin: 40px; */
   background-color: steelblue;
   font-family: Open Sans, sans-serif;
   font-size: 0.8rem;
@@ -99,6 +98,7 @@ https://www.w3schools.com/howto/howto_js_lightbox.asp
 }
 
 .f {
+  display: grid;
   grid-column: 1 / span 2;
   grid-row: 1 / span 1;
   text-align: center;
@@ -128,8 +128,6 @@ https://www.w3schools.com/css/tryit.asp?filename=trycss_buttons_basic
   border-radius: 3px;
   cursor: pointer;
   position: absolute;
-  top: 12%;
-  left: 5%;
 }
 
 #toggleButton:hover {
@@ -147,44 +145,12 @@ https://www.w3schools.com/css/tryit.asp?filename=trycss_buttons_basic
   cursor: pointer;
 }
 
-/* #tableArtist #tableTitle #tableYear {
-  cursor: pointer;
-} */
 th {
   cursor: pointer;
 }
 
 /* this channel helped me with css */
 /* https://www.youtube.com/watch?v=HgwCeNVPlo0&t=866s */
-
-/* .b {
-  grid-column: 1 / span 1;
-  grid-row: 2 / span 1;
-}
-
-.a {
-  grid-column: 1 / span 6;
-  grid-row: 1 / span 1;
-}
-.c {
-  grid-column: 2 / span 2;
-  grid-row: 2;
-}
-.d {
-  grid-column: 3 / span 1;
-  grid-row: 2;
-} */
-
-/* .paintings-container {
-  display: grid;
-  grid-gap: 3px;
-  grid-template-areas:
-    "up up up up"
-    "head head head head"
-    "image artist title year";
-  grid-template-columns: 15px 15px 15px 15px;
-  grid-template-rows: 20px 20px flex;
-} */
 
 /* 
 Referenced stackoverflow on table column spacing
@@ -219,33 +185,40 @@ ul#galleryList {
   margin: 0;
   padding: 0;
 }
+
 ul#galleryList li {
   font-size: 1em;
   margin-bottom: 0.25rem;
   cursor: pointer;
 }
+
 div.a section {
   display: none; /* programmatically change this to "grid" when gallery clicked */
   grid-gap: 5px;
   grid-template-columns: 10rem auto;
   text-align: left;
 }
+
 div.b section {
   display: none; /* go ahead and change this to "block" when you have received data */
-  /* grid-template-columns: 100px auto; */
 }
+
 div.c section {
   display: none; /* programmatically change this to "block" when gallery clicked */
   grid-template-columns: 8rem auto;
   font-size: 14pt;
 }
+
 div.d section {
   display: block;
 }
+
 div.e section {
   display: grid;
   text-align: center;
 }
+
+#header2 label,
 div.e section label {
   font-weight: bold;
   font-size: 18pt;
@@ -269,11 +242,6 @@ div.i section {
   width: 60px;
   height: 60px;
 }
-
-/* #largeImageView {
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 100% auto; 
-} */
 
 /* got this from site from the lab */
 /* CSS Loader source: https://loading.io/css/ */
