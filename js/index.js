@@ -13,11 +13,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const paintingsEndpoint =
     "https://www.randyconnolly.com/funwebdev/3rd/api/art/paintings.php?gallery=";
   const paintingImagesEndpoint =
-    "https://res.cloudinary.com/funwebdev/image/upload/w_50/art/paintings/square/";
+    "https://res.cloudinary.com/funwebdev/image/upload/w_100/art/paintings/square/";
   let galleries = [];
   let paintings = [];
-
-  //document.querySelector("div.b section").style.display = "block";
 
   fetch(galleryEndpoint)
     .then((response) => {
@@ -44,12 +42,10 @@ document.addEventListener("DOMContentLoaded", function () {
     })
     .catch((error) => console.error(error));
 
-  //toggleGalleryList();
+  toggleGalleryList();
 
-  // doesn't set the grid style when gallery list is showing again
   function toggleGalleryList() {
     const toggleButton = document.querySelector("#toggleButton");
-    //const gridContainer = document.querySelector(".container");
 
     toggleButton.addEventListener(
       "click",
@@ -59,10 +55,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (toggleButton.value == "Show Galleries") {
           toggleButton.value = "Hide Galleries";
-          //document.querySelector(".container").style.gridTemplateColumns = "0rem 25rem auto";
+          document.querySelector(".container").style.gridTemplateColumns =
+            "1fr 1fr 1fr 1fr";
         } else if (toggleButton.value == "Hide Galleries") {
           toggleButton.value = "Show Galleries";
-          //document.querySelector(".container").style.gridTemplateColumns = "15rem 25rem auto;";
+          document.querySelector(".container").style.gridTemplateColumns =
+            "0fr 1fr 1fr 1fr";
         }
 
         e.stopPropagation();
@@ -100,6 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
           document.querySelector("#paintingsList").innerHTML = " ";
           document.querySelector("#loader1").style.display = "none";
           document.querySelector("#loader2").style.display = "none";
+
           document.querySelector("div.a section").style.display = "block";
           document.querySelector("div.c section").style.display = "grid";
 
@@ -118,7 +117,6 @@ document.addEventListener("DOMContentLoaded", function () {
             .appendChild(paintingsListHeader);
 
           paintings.push(...data); //inputs paintings objects into
-          //generatePaintingsList(paintings);
 
           paintings.forEach((painting) => {
             let paintingsListItem = document.createElement("tr");
@@ -155,7 +153,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const filepath =
           "https://res.cloudinary.com/funwebdev/image/upload/art/paintings/";
-        let clickedImg = e.target.src.replaceAll("w_50/", "w_300/");
+        let clickedImg = e.target.src.replaceAll("w_100/", "w_300/");
         document.querySelector("#largeImage").setAttribute("src", clickedImg);
 
         for (painting of paintings) {
@@ -166,6 +164,7 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         }
       }
+
       //e.stopPropagation();
     },
     { capture: true }
@@ -237,9 +236,8 @@ document.addEventListener("DOMContentLoaded", function () {
 // pop up modal
 function expandPaintingModal(painting) {
   document.querySelector("#largeImage").addEventListener("click", (e) => {
-    console.log("large painting");
-
     document.querySelector("#modalContainer").style.display = "inline-block";
+    document.querySelector("body").style.margin = "0px";
 
     const filepath =
       "https://res.cloudinary.com/funwebdev/image/upload/art/paintings/";
@@ -308,3 +306,5 @@ function changeMap(e) {
 
 // live share invite
 //https://prod.liveshare.vsengsaas.visualstudio.com/join?3E5F5978CF97248E71E34EBAA2D405F28718
+
+//https://prod.liveshare.vsengsaas.visualstudio.com/join?A6967840FF3762950676184131CF3D0C6801
