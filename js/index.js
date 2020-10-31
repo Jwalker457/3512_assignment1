@@ -29,6 +29,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
       galleries.push(...data); //fill galleries array with data
 
+      // galleries were already sorted by gallery name but we sorted anyways per asg specs
+      galleries = galleries.sort(function (a, b) {
+        if (a.GalleryName < b.GalleryName) return -1;
+        else if (a.GalleryName > b.GalleryName) return 1;
+        else return 0;
+      });
+
       galleries.forEach((gallery) => {
         let galleryListItem = document.createElement("li");
         galleryListItem.textContent = gallery.GalleryName;
@@ -43,31 +50,6 @@ document.addEventListener("DOMContentLoaded", function () {
     .catch((error) => console.error(error));
 
   toggleGalleryList();
-
-  function toggleGalleryList() {
-    const toggleButton = document.querySelector("#toggleButton");
-
-    toggleButton.addEventListener(
-      "click",
-      (e) => {
-        let galleryColumn = document.querySelector("div.b");
-        galleryColumn.classList.toggle("hidden");
-
-        if (toggleButton.value == "Show Galleries") {
-          toggleButton.value = "Hide Galleries";
-          document.querySelector(".container").style.gridTemplateColumns =
-            "1fr 1fr 1fr 1fr";
-        } else if (toggleButton.value == "Hide Galleries") {
-          toggleButton.value = "Show Galleries";
-          document.querySelector(".container").style.gridTemplateColumns =
-            "0fr 1fr 1fr 1fr";
-        }
-
-        e.stopPropagation();
-      },
-      { capture: true }
-    );
-  }
 
   document.querySelector("#galleryList").addEventListener("click", (e) => {
     if (e.target.nodeName == "LI") {
@@ -105,6 +87,13 @@ document.addEventListener("DOMContentLoaded", function () {
             .appendChild(paintingsListHeader);
 
           paintings.push(...data); //inputs paintings objects into
+
+          // sorting by artist last name by default
+          paintings = paintings.sort(function (a, b) {
+            if (a.LastName < b.LastName) return -1;
+            else if (a.LastName > b.LastName) return 1;
+            else return 0;
+          });
 
           paintings.forEach((painting) => {
             let paintingsListItem = document.createElement("tr");
@@ -146,8 +135,6 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         }
       }
-
-      //e.stopPropagation();
     },
     { capture: true }
   );
@@ -215,7 +202,33 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 }); // dom content loaded
 
-// pop up modal
+// hides and shows gallery list with button click
+function toggleGalleryList() {
+  const toggleButton = document.querySelector("#toggleButton");
+
+  toggleButton.addEventListener(
+    "click",
+    (e) => {
+      let galleryColumn = document.querySelector("div.b");
+      galleryColumn.classList.toggle("hidden");
+
+      if (toggleButton.value == "Show Galleries") {
+        toggleButton.value = "Hide Galleries";
+        document.querySelector(".container").style.gridTemplateColumns =
+          "1fr 1fr 1fr 1fr";
+      } else if (toggleButton.value == "Hide Galleries") {
+        toggleButton.value = "Show Galleries";
+        document.querySelector(".container").style.gridTemplateColumns =
+          "0fr 1fr 1fr 1fr";
+      }
+
+      e.stopPropagation();
+    },
+    { capture: true }
+  );
+}
+
+// shows and hides the pop up modal when a painting in the large painting view is clicked
 function expandPaintingModal(painting) {
   document.querySelector("#largeImage").addEventListener("click", (e) => {
     document.querySelector("#modalContainer").style.display = "inline-block";
